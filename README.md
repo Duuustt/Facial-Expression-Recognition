@@ -26,8 +26,8 @@
 ├── webcam_emotion.py       # 实时检测：调用摄像头进行人脸捕获与实时分类
 ├── predict_image.py        # 静态预测：对单张图片进行推理测试
 ├── emotion_cnn_model.pth   # 训练好的 .pth 权重文件
+├──training_curves.png / confusion_matrix.png # 训练产出的可视化指标，直观展示模型收敛情况与各类别识别精度。
 └── README.md
-
 ```
 
 ## 5. 快速上手
@@ -62,5 +62,27 @@ pip install torch torchvision opencv-python pillow scikit-learn matplotlib
 * **优化器**：Adam (Learning Rate: 0.001)
 * **学习率调度**：CosineAnnealingLR
 * **训练周期**：70 Epochs
+
+## 7. 实验结果与可视化
+模型经过 70 轮（Epochs）训练，最终在测试集上达到了较好的收敛效果。
+
+### 7.1 训练曲线
+通过记录每一轮的 Loss 和 Accuracy，可以看到模型在训练集和验证集上的表现同步提升，有效抑制了过拟合。
+![训练曲线](training_curves.png)
+
+### 7.2 混淆矩阵
+混淆矩阵展示了模型对 7 类情感的具体分类情况。从图中可以看出，模型在“开心（Happy）”和“惊讶（Surprise）”上的识别率极高，而对“恐惧（Fear）”和“悲伤（Sad）”的区分仍有提升空间，这表明面部表情识别较难识别恐惧和悲伤。
+![混淆矩阵](confusion_matrix.png)
+
+## 8. 预测示例
+本项目提供了两种预测方式：
+
+1. **单张图片预测**：
+   运行 `predict_image.py`，输入图片路径，模型将输出最可能的情感类别及置信度。
+   ```bash
+   python predict_image.py --image_path test_sample.jpg
+2. **实时摄像头预测**：
+    运行 webcam_emotion.py，系统将自动调用人脸检测算子并在视频流中实时标注情绪。
+
 
 ---
