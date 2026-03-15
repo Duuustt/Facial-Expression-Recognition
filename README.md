@@ -79,8 +79,6 @@ pip install torch torchvision opencv-python pillow scikit-learn matplotlib
 
 1. **单张图片预测**：
    运行 `predict_image.py`，输入图片路径，模型将输出最可能的情感类别及置信度。
-   ```bash
-      python predict_image.py --image_path ./test_sample.jpg
 ![单张预测结果](test_sample.jpg)
 2. **实时摄像头预测**：
     运行 webcam_emotion.py，系统将自动调用人脸检测算子并在视频流中实时标注情绪。
